@@ -5,9 +5,6 @@ local TweenService = game:GetService("TweenService")
 local Module = {}
 Module.__index = Module
 
-Module._Tasks = {}
-Module._Listeners = {}
-
 Module.Themes = {
     ["Midnight"] = {
         BackgroundProperties = {
@@ -117,6 +114,19 @@ function Module.Fadeout(Element, Duration)
     local Tween = TweenService:Create(Element, TweenInfo, {Transparency = 1})
 
     Tween:Play()
+end
+
+function Module.ApplyTheme(Element, Theme)
+    local BackgroundProperties = Module.Themes[Theme].BackgroundProperties
+    local TextProperties = Module.Themes[Theme].TextProperties
+
+    Element.BackgroundColor3 = BackgroundProperties.BackgroundColor3
+    Element.BackgroundTransparency = BackgroundProperties.BackgroundTransparency
+
+    Element.TextColor3 = TextProperties.TextColor3
+    Element.TextSize = TextProperties.TextSize
+    Element.TextFont = TextProperties.TextFont
+    Element.TextTransparency = TextProperties.TextTransparency
 end
 
 return Module
